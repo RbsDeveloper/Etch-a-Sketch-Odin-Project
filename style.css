@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: linear-gradient(
+    110deg,
+    hsl(48deg 98% 50%) 0%,
+    hsl(47deg 97% 50%) 8%,
+    hsl(45deg 98% 51%) 17%,
+    hsl(44deg 98% 52%) 25%,
+    hsl(43deg 98% 52%) 33%,
+    hsl(41deg 98% 53%) 42%,
+    hsl(40deg 98% 54%) 50%,
+    hsl(38deg 98% 54%) 58%,
+    hsl(37deg 98% 55%) 67%,
+    hsl(35deg 98% 55%) 75%,
+    hsl(34deg 97% 56%) 83%,
+    hsl(32deg 96% 56%) 92%,
+    hsl(31deg 96% 56%) 100%
+  );
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main {
+    display: flex;
+}
+
+.settings {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+    margin-right: 100px;
+    border-radius: 20px;
+}
+
+
+/*BTNS STYLING*/
+
+.color-palette {
+    width: 75px;
+    height: 75px;
+    border: none;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: transform 250ms ease, transform 125ms ease;   
+}
+
+.color-palette::-webkit-color-swatch {
+    border: none; /* Removes border of color swatch */
+    border-radius: 50%; /* Makes inner circle rounded */
+  }
+
+.-color-palette::-webkit-color-swatch-wrapper {
+    padding: 0; /* Removes padding around swatch */
+    border-radius: 50%; /* Aligns with overall circular design */
+}
+
+.color-palette:hover {
+    transform: scale(1.1);
+}
+
+.color-palette:active {
+    transform: scale(0.9);
+}
+
+.btn {
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+    border-color: transparent;
+}
+
+.btn:hover {
+    cursor: pointer;
+    border-color: black;
+}
+
+.grid-size-slider{
+    accent-color: black;  
+}
+
+.grid {
+    width: 500px;
+    height: 500px;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 0;
+    box-sizing: border-box;
+}
+
+.grid div {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+.range-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
