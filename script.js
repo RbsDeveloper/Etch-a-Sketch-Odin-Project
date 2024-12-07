@@ -1,32 +1,3 @@
-/*
-1)se face o variabila care preia valoarea inputului de tip range prin care se presupune ca se poate seta dimensiunea dorita la grid;
-
-    - by default ar trebuii sa plece de la 16;
-
-    -trebuie sa preia la incarcarea paginii valoarea setata la slider bydefault si sa o returneze plus console
-
-    -in cazul in care se schimba valoarea range-ului trebuie sa returneze aceasta avalorare
-
-2)se creeaza o prima functie care imparte singura plansa si o populeaza automat cu patrate;
-    - mai intai ar trebuii sa aflam latimea plansei & inaltimea (ar trebuii sa fie fixa mereu)
-    -impartim latimea la range-ul dorit si aflam cate patratele ne intra pe latime
-        -multiplicam numarul de patratele cu numarul de randuri in jos si obtinem totalul patratelelor;
-        -stocam nr patratelelor intr-o variabila
-        -ne folosim de un loop pentru a creea patratel cu patratel si al introduce in div-ul 'grid' dar cu inner HTML si folosind template literals pentru a seta width & height la fiecare in parte. 
-        -nu ne trebuie nici margin si nici padding si probabil nici border, aici vedem
-
-3 functia de colorat
-    -stocam intr-o variabila culoarea de bg
-    -facem o func bazata pe un event listener de click down si hover, de cauta pe net cum 
-    rainbow e tot aici doar ca facem o functie care sa genereze culori random
-
-
-4) functia eraser, foloseste acelas criteriu ca si la functia normala de colorat doar ca o sa aiba culoarea alba bydefault ca sa para ca stergem 
-5) functia clean, seteaza cu un loop la toate patratelele bg-ul alb pentru a parea ca -sa sters plansa. (hint: posibil efect facut cu opacitatea ? sa para ca se stinge culoarea incet incet spre alb)
-
-6) daca se misca range-ul, trebuie sa il detecteze un event listener care sa actionez eo functie de sterge automat toate patratele si le inlocuoieste cu cate e necesar
-*/
-
 //VARIABLES
 
 const colorPicker = document.getElementById('color-picker');
@@ -36,16 +7,17 @@ const clearBtn = document.getElementById('clear');
 const rangePlaceholder = document.getElementById('rangePlaceholder');
 const rangeSlider = document.getElementById('slider');
 const grid = document.getElementById('grid');
+const year = document.getElementById('current-year');
 
 let gridDimension;
 
 
-//This reflects the value of the slider 
+// Updates the displayed grid size value (e.g., 16x16)
 function updateUiGridDimension () {
     rangePlaceholder.innerText = `${gridDimension}X${gridDimension}`;
 }
 
-//This function calculates the width of each square based on the selected dimension from the slider
+// Calculates the width of each square based on the grid's dimension
 function defineSquareDimension (squareNum) {
     const gridWidth = grid.offsetWidth;
 
@@ -54,7 +26,7 @@ function defineSquareDimension (squareNum) {
     return(squareDimension);
 }
 
-//This function injects the squares inside the grid container
+// Populates the grid with square div elements based on the grid dimension
 function injectSquaresInsideGrid (squareDimension) {
 
     grid.innerHTML = '';
@@ -84,7 +56,8 @@ function injectSquaresInsideGrid (squareDimension) {
 
     //console.log(selectedColor)
     return selectedColor;
-}*/
+}
+*/
 
 let currentColor = colorPicker.value;
 
@@ -98,7 +71,7 @@ function obtainSquareArray () {
     return squaresArr; 
 }
 
-//This function is responsible for the initial grid display 
+// Sets up the initial grid based on the default slider value
 function displayInitialGrid () {
     
     gridDimension = rangeSlider.value;
@@ -116,7 +89,7 @@ function displayInitialGrid () {
 }
 
 
-//This function displays each grid variation
+// Dynamically updates the grid when the slider value changes
 const displayChangedGrid = () => {
     rangeSlider.addEventListener('input', (e) => {
     
@@ -139,7 +112,7 @@ const displayChangedGrid = () => {
 }
 
 
-//Helper function of the paintSquares function, created to avoid code repetion
+// Helper function to apply the appropriate color or effect to a square
 function setSquareColor(square) {
     if(rainbowBtn.classList.contains('active')){
         square.style.backgroundColor = `${randomColorGenerator()}`;
@@ -150,7 +123,7 @@ function setSquareColor(square) {
     }
 }
 
-// Function that makes the painting possible on the grid
+// Enables coloring functionality for squares in the grid
 
 function paintSquares(arrSq) {
 
@@ -204,7 +177,7 @@ function paintSquares(arrSq) {
 }
 
 
-//This function cleans the entire sheet 
+// Clears all colors from the grid 
 function cleanSheet () {
     const squaresArr = obtainSquareArray();
     
@@ -213,7 +186,7 @@ function cleanSheet () {
     })
 }
 
-
+// Activates or deactivates eraser mode
 function toggleEraser () {
     
     if(eraserBtn.classList.contains('active')){
@@ -224,6 +197,7 @@ function toggleEraser () {
     
 }
 
+// Activates or deactivates rainbow mode
 function toggleRainbowMode() {
     if(rainbowBtn.classList.contains('active')){
         rainbowBtn.classList.remove('active')
@@ -246,12 +220,22 @@ function randomColorGenerator () {
     return color;
 }
 
+// Returns the current year
+
+ function getYear () {
+    const currentYear = new Date().getFullYear();
+
+    return currentYear
+}
+
+year.innerText = getYear();
+
 
 window.addEventListener('load', displayInitialGrid)
 
 displayChangedGrid()
 
-
+// Deactivates rainbow and eraser modes when selecting a new color
 colorPicker.addEventListener('click', ()=>{
     
     if(rainbowBtn.classList.contains('active')){
